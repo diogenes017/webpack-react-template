@@ -22,4 +22,51 @@ public -> index.html
 dist
 ```
 
+#### Configuración de webpack 5 para react.js
+
+ >Clase 23
+
+Instalamos babel
+`npm install @babel/core @babel/preset-env @babel/preset-react babel-loader -D`
+
+configuramos `.babelrc`
+
+Instalamos webpack
+`npm install webpack webpack-cli webpack-dev-server -D`
+
+Configuramos nuestro `webpack.config.js`
+
+``` js
+    const path = require('path');
+
+    module.exports = {
+        entry: './src/index.js',
+        output: {
+            path: path.resolve(__dirname, 'dist'),
+            filename: 'bundle.js'
+        },
+
+        resolve: {
+            extensions: ['.js', '.jsx']
+        },
+
+        module: {
+            rules: [
+                {
+                    test: /\.(js|jsx)$/,
+                    exclude: /node_modules/,
+                    use : {
+                        loader: 'babel-loader',
+                    }
+                }
+            ]
+        },
+        
+        devServer: {
+            contentBase: path.join(__dirname, 'dist'),
+            compress: true,
+            port: 3006
+        }
+    }
+```
 
