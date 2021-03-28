@@ -70,3 +70,35 @@ Configuramos nuestro `webpack.config.js`
     }
 ```
 
+#### Configuración de plugins y loaders para React
+
+ >Clase 24
+
+Instalamos 
+`npm install html-loader html-webpack-plugin -D`
+
+configuramos 
+``` js
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+    ...
+        {
+            test: /\.html$/,
+            use: [
+                {loader: 'html-loader'}
+            ]
+        }
+    
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: './public/index.html',
+            filename: './index.html'
+        })
+    ]
+```
+
+Script:
+``` js
+    "build" : "webpack --mode production",
+    "server:start": "webpack serve"
+```
+
