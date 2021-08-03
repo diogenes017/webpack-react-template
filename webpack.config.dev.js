@@ -1,29 +1,17 @@
 const path = require('path');
-
-/* Plugins */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-/* Optimize */
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const {cleanWebpackPlugin} = require('clean-webpack-plugin');
-
 module.exports = {
-    mode: 'production',
+    mode: 'development', /* Modo de desarrollo */
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js',
-        publicPath: "/"
+        filename: 'bundle.js'
     },
 
     resolve: {
-        extensions: ['.js', '.jsx'],
-        alias: {
-            '@components': path.resolve(__dirname, 'src/components/'),
-            '@styles': path.resolve(__dirname, 'src/sass/')
-        }
+        extensions: ['.js', '.jsx']
     },
 
     module: {
@@ -42,9 +30,6 @@ module.exports = {
                 ]
             },
             {
-                /* La dependencia de MiniCssExtractPlugin 
-                es para el modo de produccion, 
-                el cual reemplaza la de style-loader. */
                 test: /\.s[ac]ss$/,
                 use: [
                     /* 'style-loader', */
@@ -63,15 +48,12 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({
             filename: '[name].css',
-        }),
-        new CleanWebpackPlugin(),
+        })
     ],
 
-    optimization: {
-        minimize: true,
-        minimizer: [
-            new CssMinimizerPlugin(),
-            new TerserPlugin(),
-        ]
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        compress: true,
+        port: 3006
     }
 }

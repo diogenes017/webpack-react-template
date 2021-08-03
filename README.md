@@ -145,4 +145,58 @@ configuramos webpack.config.js
         })
     ]
 ```
+#### Optimización de Webpack para React
 
+ > Clase 26
+
+Instalar paquetes:
+`npm i css-minimizer-webpack-plugin -D`
+`npm i terser-webpack-plugin -D`
+`npm i clean-webpack-plugin -D`
+
+Creamos una nueva configuracion de webpack en modo desarrollo.
+En la versión de producción eliminamos la configuración de devServer: {} ya que solo es utilizada en desarrollo.
+
+Configuramos entonces lo que instalamos en esta parte de la configuracion dentro de webpack.config.js
+
+``` js
+    const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+    const TerserPlugin = require('terser-webpack-plugin')
+    const {cleanWebpackPlugin} = require('clean-webpack-plugin')
+
+    output: {
+        publicPath: "/",
+    },
+    resolve: {
+        alias: {
+            '@components': path.resolve(__dirname, 'src/components/'),
+            '@styles': path.resolve(__dirname, 'src/sass/')
+        }
+    },
+    plugins: [
+        new CleanWebpackPlugin(),
+    ],
+    optimization: {
+        minimize: true,
+        minimizer: [
+            new CssMinimizerPlugin(),
+            new TerserPlugin(),
+        ]
+    }
+```
+
+Para terminar, configuramos nuestros scripts para build y server en desarrollo
+``` json
+    "scripts": {
+        "build": "webpack --config webpack.config.js",
+        "server:start": "webpack serve --config webpack.config.dev.js"
+  },
+```
+
+
+
+<!-- . -->
+
+Para facilitar el proceso de configuración, podemos descargar templates en la siguiente web app:
+
+`https://createapp.dev/webpack`
