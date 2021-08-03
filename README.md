@@ -193,7 +193,13 @@ Para terminar, configuramos nuestros scripts para build y server en desarrollo
   },
 ```
 
+#### Deploy del proyecto con React.js
 
+ > Clase 27
+
+Mismo deploy con netlify.
+`netlify.toml`
+importante no tener dist en .gitignore
 
 <!-- . -->
 
