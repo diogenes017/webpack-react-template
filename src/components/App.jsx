@@ -1,5 +1,8 @@
 import React from 'react';
 
-const App = () => <h1> Hello React!!! </h1>
+/* styles */
+import '../sass/global.scss';
+
+const App = () => <h1> Hello React devs!! </h1>
 
 export default App;

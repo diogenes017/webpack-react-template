@@ -13,7 +13,7 @@ iniciamos npm
 `npm init -y`
 
 instalamos react
-`npm install react react-dom -S` <!-- save -->
+`npm install react react-dom -S` <!-- save / dependencia --> 
 
 creamos los recursos del proyecto
 ``` js
@@ -100,5 +100,49 @@ Script:
 ``` js
     "build" : "webpack --mode production",
     "server:start": "webpack serve"
+```
+
+nota: Si agregamos un runtime automatico para babel no necesitamos importar react en los componentes .jsx.
+
+``` js
+    {
+	"presets": [
+			"@babel/preset-env",
+			["@babel/preset-react", {
+				"runtime": "automatic"
+			}]
+	]
+}
+```
+
+#### Configuración de Webpack para CSS en React
+
+ > Clase 25
+
+Instalamos:
+`npm i mini-css-extract-plugin css-loader style-loader sass sass-loader -D`
+
+configuramos webpack.config.js
+``` js
+    const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+    module: {
+        rules: [
+            {
+                test: /\.s[ac]ss$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader'
+                ]
+            }
+        ]
+    }
+
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: '[name].css'
+        })
+    ]
 ```
 
